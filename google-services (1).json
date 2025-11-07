@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "4418640335",
+    "project_id": "nexachat1",
+    "storage_bucket": "nexachat1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4418640335:android:2d5d1347e0845d9fe51aba",
+        "android_client_info": {
+          "package_name": "Com.nexa.nexachat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf0QszQgeUC8ZW0eZz9EZZ6w_FDX36mQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4418640335:android:8b3c4a2ceffcbf77e51aba",
+        "android_client_info": {
+          "package_name": "com.nexa.nexachat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf0QszQgeUC8ZW0eZz9EZZ6w_FDX36mQU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

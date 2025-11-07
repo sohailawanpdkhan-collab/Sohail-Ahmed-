@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    match /rooms/{roomId} {
+      allow read: if isRoomMember(roomId);
+      allow create: if request.auth != null;
+      allow update: if isRoomMember(roomId);
+      allow delete: if isAdmin();
+
+      match /messages/{messageId} {
+        allow create: if request.auth != null && isRoomMember(roomId);
+        allow read: if isRoomMember(roomId);
+        allow update: if false;
+        allow delete: if false;
+      }
+    }
+
+    match /subscriptions/{subId} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.userId || isAdmin());
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isRoomMember(roomId) {
+      return request.auth != null &&
+             exists(/databases/$(database)/documents/rooms/$(roomId)) &&
+             get(/databases/$(database)/documents/rooms/$(roomId)).data.members.hasAny([request.auth.uid]);
+    }
+  }
+}
